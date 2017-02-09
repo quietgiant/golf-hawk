@@ -1,58 +1,38 @@
-
+import datetime
+import re
 import urllib2
+from bs4 import BeautifulSoup
+
+#site to crawl to get data
+uri = "https://sports.yahoo.com/golf/pga/stats/bycategory?cat=CUP_POINTS&season=2017"
+date = datetime.date.today()
+
 
 
 def seasonStatLeaders():
-	print "season"
+	print "season leaders"
 
 def currentTournament():
 	print "tourney"
 
 def fedexStandings():
-	print "fx"
+	print "FedEx Cup standings as of %s" % date
+	source = urllib2.urlopen(uri)
+	soup = BeautifulSoup(source.read(), "lxml")
+	
+	player_source = soup.find_all("td", class_="player")
+
+	for line in player_source:
+		players = re.search('>(.*?)</a>', str(line))
+		if players is None:
+			print "No players found."
+			break
+		print players.group(0)
+	
+	#for p in players:
+
+	print 'Closing connection...'
+	source.close()
 
 def	searchPlayer():
 	print "player"
-
-#####
-import urllib, urllib2
-import zipfile
-import re
-
-uri = 'http://www.pythonchallenge.com/pc/def/channel.%s'
-ext = 'html'
-
-res = urllib2.urlopen(uri % ext)
-html = res.read()
-print html
-
-print 'attempting to download...\n'
-
-target = 'channel.zip'
-ext = 'zip'
-folder = urllib.urlretrieve(uri % ext, target)
-
-print 'download complete. \nstarting extraction.\n'
-
-directory = zipfile.ZipFile('channel.zip')
-comments = []
-num = '90052'
-
-while True:
-	file = '%s.txt' % num 
-	data = directory.read(file)
-	comment = directory.getinfo(file).comment
-	print 'DATA:\n%s\n----------' % data
-	print 'COMMENT:\n%s\n----------' % comment
-	comments.append(comment)
-	new = re.search(r'(\d+)', data)
-	if new is None:
-		break
-	num = new.group(0)
-	print '%s\n' % num
-
-print ''.join(comments)
-
-print 'closing connection...'
-res.close()
-print 'done.'

@@ -14,8 +14,8 @@ print "3. Retrieve current FedEx Cup standings"
 print "4. Search stats for player"
 print "5. Exit\n"
 
-option = int(raw_input("Enter option > "))
-
+#option = int(raw_input("Enter option > "))
+option = 3
 if (option < 1) or (option > 5):
 	print "Invalid menu option....quitting."
 	quit()
