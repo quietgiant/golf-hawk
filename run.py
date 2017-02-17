@@ -8,27 +8,24 @@ print "CURRENT DATE: %s" % date
 print "CURRENT TIME: %s\n" % time
 
 print "MENU:"
-print "1. Display PGA Tour stats leaders"
-print "2. Retrieve this week's tournament leaderboard"
-print "3. Retrieve current FedEx Cup standings"
-print "4. Search stats for player"
-print "5. Exit\n"
+print "1. Retrieve this week's tournament leaderboard"
+print "2. Retrieve current FedEx Cup standings"
+print "3. Search stats for a player"
+print "4. Exit\n"
 
 #option = int(raw_input("Enter option > "))
-option = 3
-if (option < 1) or (option > 5):
+option = 2
+if (option < 1) or (option > 4):
 	print "Invalid menu option....quitting."
 	quit()
 
 if (option == 1):
-	functions.seasonStatLeaders()
-elif (option == 2):
 	functions.currentTournament()
-elif (option == 3):
+elif (option == 2):
 	functions.fedexStandings()
-elif (option == 4):
+elif (option == 3):
 	functions.searchPlayer()
 else:
 	print "Quitting..."
 	quit()
-	
+
