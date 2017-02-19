@@ -1,5 +1,7 @@
 import datetime
-import functions
+import lib.current_tournament as tournament
+import lib.fedex_rank as fedex
+import lib.search_player as search
 
 date = datetime.date.today()
 time = datetime.datetime.time(datetime.datetime.now())
@@ -20,11 +22,11 @@ if (option < 1) or (option > 4):
 	quit()
 
 if (option == 1):
-	functions.currentTournament()
+	tournament.currentTournament()
 elif (option == 2):
-	functions.fedexStandings()
+	fedex.fedexStandings()
 elif (option == 3):
-	functions.searchPlayer()
+	search.searchPlayer()
 else:
 	print "Quitting..."
 	quit()
