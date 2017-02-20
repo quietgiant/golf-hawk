@@ -1,11 +1,9 @@
 
-if [ $# -eq 0 ]; then
-	echo "need commit message."
-	exit
-fi
+echo "commit message > "
+read msg
 
 git add -A
-git commit -m $($1)
+git commit -m $(msg)
 git push origin master
 
 echo "done."

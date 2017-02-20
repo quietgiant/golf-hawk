@@ -4,7 +4,7 @@ import urllib2
 from bs4 import BeautifulSoup
 from golfer import Golfer
 
-#site to crawl to get data
+# using yahoo services to get data
 uri = "https://sports.yahoo.com/golf/pga/stats/bycategory?cat=CUP_POINTS&season=2017"
 date = datetime.date.today()
 
@@ -13,25 +13,32 @@ def fedexStandings():
 	print "FedEx Cup standings as of %s\n" % date
 	response = urllib2.urlopen(uri)
 	source = BeautifulSoup(response.read(), "html.parser")
+	response.close()
 	
-	data = source.find_all("td", {"class" : ["first rank", "player", "stat"]})
+	if source is None:
+		print "Error reading source."
+		quit()
+
+	data = source.find_all("td", {"class" : [ "first rank", "player", "stat"]})
 
 	golfers = process(data) # list containing Golfer objects
 
 	for g in golfers:
 		g.string()
 
-	response.close()
 
 def process(data):
 
 	golfers = [] # list for Golfer objects
-	c = 0 # counter to keep track of what line to process
+	c = 0 # counter to keep track of what line is being processed
 	rank = "N/A" # current player fedex cup rank
 	name = "N/A" # current player name
 	points = "N/A" # current player fedex cup points
 
 	for line in data:
+		print line
+		print ""
+		'''
 		if c == 0: # strip fedex cup ranking
 			match = match_digits(line)
 			if not match:
@@ -53,12 +60,16 @@ def process(data):
 				continue
 			points = match
 			# all data for current golfer is collected
-			temp = Golfer(rank, name, points)
-			golfers.append(temp)
+			#temp = Golfer(rank, name, points)
+			#golfers.append(temp)
+			print name
+			print rank
+			print points
 			c = 0
 		else:
 			print "Error processing source."
 			quit()
+		'''
 
 	return golfers
 
