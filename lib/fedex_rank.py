@@ -15,11 +15,12 @@ def fedexStandings():
 	source = BeautifulSoup(response.read(), "html.parser")
 	response.close()
 	
-	if source is None:
+	if not source:
 		print "Error reading source."
 		quit()
 
-	data = source.find_all("td", {"class" : [ "first rank", "player", "stat"]})
+	data = source.find_all("td", {"class" : "first rank"})
+	data += source.find_all("td", {"class" : ["player", "stat"]})
 
 	golfers = process(data) # list containing Golfer objects
 
