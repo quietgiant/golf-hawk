@@ -15,7 +15,7 @@ def	searchPlayer():
 
 	if not term:
 		print "Input error."
-		quit()
+		searchPlayer()
 
 	response = urllib2.urlopen(uri % term)
 	source = BeautifulSoup(response.read(), "html.parser")
@@ -45,11 +45,10 @@ def	searchPlayer():
 		searchPlayer()
 
 def display(golfers):
-
 	print "Ambigious search. Results..."
 	for g in golfers:
 		print g
-	print "Try search again."
+	print "Specify golfer and try search again."
 
 def match_name(line):
 	match = re.findall(r'[A-Z]{1}\w+\s{1}[A-Z]{1}\w+', str(line))

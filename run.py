@@ -5,19 +5,25 @@ import lib.search_player as search
 
 def main():
 
-	option = printMenu()
+	try:	
+		option = printMenu()
+		
+		if (option < 1) or (option > 4):
+			print "Invalid option.\n"
+			main()
 
-	if (option < 1) or (option > 4):
+		if (option == 1):
+			tournament.currentTournament()
+		elif (option == 2):
+			fedex.fedexStandings()
+		elif (option == 3):
+			search.searchPlayer()
+		else:
+			print "Quitting...\n"
+			quit()
+	except ValueError:
+		print "Please provide option.\n"
 		main()
-	if (option == 1):
-		tournament.currentTournament()
-	elif (option == 2):
-		fedex.fedexStandings()
-	elif (option == 3):
-		search.searchPlayer()
-	else:
-		print "Quitting..."
-		quit()
 
 def printMenu():
 
@@ -33,8 +39,8 @@ def printMenu():
 	print "3. Search stats for a player"
 	print "4. Exit\n"
 
-	#return int(raw_input("Enter option > "))
-	return 3
+	return int(raw_input("Enter option > "))
+	#return 3
 
 if __name__ == "__main__":
 	main()
