@@ -29,7 +29,6 @@ def fedexStandings():
 
 
 def process(data):
-
 	golfers = [] # list for Golfer objects
 	c = 0 # counter to keep track of what line is being processed
 	rank = "N/A" # current player fedex cup rank

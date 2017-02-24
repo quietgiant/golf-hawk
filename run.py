@@ -4,7 +4,6 @@ import lib.fedex_rank as fedex
 import lib.search_player as search
 
 def main():
-
 	try:	
 		option = printMenu()
 		
@@ -26,7 +25,6 @@ def main():
 		main()
 
 def printMenu():
-
 	date = datetime.date.today()
 	time = datetime.datetime.time(datetime.datetime.now())
 	
@@ -39,8 +37,8 @@ def printMenu():
 	print "3. Search stats for a player"
 	print "4. Exit\n"
 
-	return int(raw_input("Enter option > "))
-	#return 3
+	#return int(raw_input("Enter option > "))
+	return 3
 
 if __name__ == "__main__":
 	main()
