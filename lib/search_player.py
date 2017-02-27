@@ -50,10 +50,16 @@ def process(data):
 
 def jump(url):
 	response = urllib2.urlopen(uri % url)
-	source = BeautifulSoup.(response.read(), "html.parser")
+	source = BeautifulSoup(response.read(), "html.parser")
 	response.close()
 
+	if not source:
+		print "Error reading source."
+		quit()
 
+	data = source.find_all("div", {"id" : "golfTourStats"})
+
+	
 
 
 def print_golfers(golfers):
